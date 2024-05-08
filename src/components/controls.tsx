@@ -26,8 +26,6 @@ export function Controls() {
 
       prufer.convert();
 
-      console.log(prufer.getTree());
-
       setTree(prufer.getTree());
     } catch (err) {
       setError(getErrorMessage(err));
@@ -38,7 +36,7 @@ export function Controls() {
     <div className="flex flex-col sm:flex-row gap-2">
       <div className="flex flex-col-reverse sm:flex-col gap-2 w-full">
         <Input
-          placeholder="2,3,4,4"
+          placeholder="4,4,4,5"
           value={value}
           onChange={(e) => {
             setError(null);
