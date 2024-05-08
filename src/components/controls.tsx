@@ -53,7 +53,7 @@ export function Controls() {
             : error}
         </p>
       </div>
-      <Button onClick={handleClick}>Generate</Button>
+      <Button onClick={handleClick}>Convert</Button>
     </div>
   );
 }
