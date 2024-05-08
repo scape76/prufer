@@ -6,7 +6,7 @@ export const siteConfig = {
   ogImage: "https://prufer.scape76.com/opengraph-image.png",
   links: {
     telegram: "https://t.me/@scape76",
-    github: "https://github.com/scape76",
+    github: "https://github.com/scape76/prufer",
     www: "https://www.scape76.com",
     about: "https://www.geeksforgeeks.org/prufer-code-tree-creation/",
   },
