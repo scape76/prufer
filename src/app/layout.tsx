@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ["prufer", "prufer sequence", "label tree"],
+  keywords: ["prufer", "prufer sequence", "label tree", "spanning tree"],
   authors: [
     {
       name: siteConfig.author,
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
+    images: [siteConfig.ogImage],
     creator: "@Dan2090281",
   },
   icons: {
