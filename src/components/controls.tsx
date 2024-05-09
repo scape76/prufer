@@ -2,58 +2,38 @@
 
 import * as React from "react";
 
-import { useAtom, useSetAtom } from "jotai";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { treeAtom } from "@/store/tree";
-import { sequenceSchema } from "@/lib/validations/sequence";
-import { cn, getErrorMessage } from "@/lib/utils";
-import { Prufer } from "@/lib/prufer";
+import { cn } from "@/lib/utils";
+import { useConvert } from "@/hooks/use-convert";
+import { useAtom } from "jotai";
+import { controlsAtom } from "@/store/controls";
 
 export function Controls() {
-  const [value, setValue] = React.useState("");
-  const [error, setError] = React.useState<string | null>(null);
-
-  const [_, setTree] = useAtom(treeAtom);
-
-  const handleClick = () => {
-    try {
-      const validated = sequenceSchema.parse(value);
-
-      const sequence = validated.split(",").map(Number);
-
-      const prufer = new Prufer(sequence);
-
-      prufer.convert();
-
-      setTree(prufer.getTree());
-    } catch (err) {
-      setError(getErrorMessage(err));
-    }
-  };
+  const [controls, setControls] = useAtom(controlsAtom);
+  const { convert } = useConvert();
 
   return (
     <div className="flex flex-col sm:flex-row gap-2">
       <div className="flex flex-col-reverse sm:flex-col gap-2 w-full">
         <Input
           placeholder="4,4,4,5"
-          value={value}
+          value={controls.inputValue}
           onChange={(e) => {
-            setError(null);
-            setValue(e.target.value);
+            setControls({ error: null, inputValue: e.target.value });
           }}
         />
         <p
           className={cn("text-[0.8rem] text-muted-foreground", {
-            "text-destructive": !!error,
+            "text-destructive": !!controls.error,
           })}
         >
-          {!error
+          {!controls.error
             ? "Provide a prufer sequence with labels separated by comma."
-            : error}
+            : controls.error}
         </p>
       </div>
-      <Button onClick={handleClick}>Convert</Button>
+      <Button onClick={() => convert(controls.inputValue)}>Convert</Button>
     </div>
   );
 }
